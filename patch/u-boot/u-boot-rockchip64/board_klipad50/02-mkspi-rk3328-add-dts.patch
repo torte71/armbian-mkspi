@@ -1567,7 +1567,7 @@ diff --git a/arch/arm/dts/rk3328-klipad50.dts b/arch/arm/dts/rk3328-klipad50.dts
 +		phy-handle = <0x5f>;
 +		snps,txpbl = <0x04>;
 +		clock_in_out = "output";
-+		status = "okay";
++		status = "disabled";
 +		phy-supply = <0x5d>;
 +		assigned-clocks = <0x02 0x65>;
 +		assigned-clock-rate = <0x2faf080>;
