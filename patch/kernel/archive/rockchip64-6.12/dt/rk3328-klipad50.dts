@@ -1180,6 +1180,7 @@
 		iommus = <0x46>;
 		power-domains = <0x44 0x08>;
 		phandle = <0x98>;
+		status = "disabled";
 	};
 
 	iommu@ff350800 {
@@ -1206,6 +1207,7 @@
 		resets = <0x02 0xa6 0x02 0xa4 0x02 0xa8 0x02 0xa9 0x02 0xa5 0x02 0xa7>;
 		reset-names = "video_h\0video_a\0video_core\0video_cabac\0niu_a\0niu_h";
 		phandle = <0x99>;
+		status = "disabled";
 	};
 
 	iommu@ff360480 {
@@ -1266,6 +1268,7 @@
 		resets = <0x02 0x88 0x02 0x8a 0x02 0x8b>;
 		reset-names = "core\0axi\0ahb";
 		phandle = <0x9b>;
+		status = "disabled";
 	};
 
 	iep@ff3a0000 {
