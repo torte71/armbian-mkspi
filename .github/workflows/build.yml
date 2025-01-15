@@ -12,7 +12,7 @@ jobs:
         shell: bash
         run: |
           #mkdir -p armbian-mkspi/output/images ; echo abc > armbian-mkspi/output/images/testfile
-          git clone https://github.com/torte71/armbian-mkspi && cd armbian-mkspi && ./compile.sh BOARD=klipad50 BRANCH=current RELEASE=bookworm BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_CONFIGURE=no
+          git clone https://github.com/torte71/armbian-mkspi && cd armbian-mkspi && ./compile.sh BOARD=klipad50 BRANCH=current RELEASE=bookworm BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=xz
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
