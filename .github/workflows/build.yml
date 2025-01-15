@@ -1,0 +1,36 @@
+name: "Build Klipad50 Image"
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        shell: bash
+        run: |
+          #mkdir -p armbian-mkspi/output/images ; echo abc > armbian-mkspi/output/images/testfile
+          git clone https://github.com/torte71/armbian-mkspi && cd armbian-mkspi && ./compile.sh BOARD=klipad50 BRANCH=current RELEASE=bookworm BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_CONFIGURE=no
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Armbian-unofficial-Klipad50
+          path: ./armbian-mkspi/output/images/
+
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          #name: Armbian-unofficial-Klipad50
+          path: .
+      #- run: zip -r build.zip testpath
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "Armbian-unofficial-Klipad50/*"
+
