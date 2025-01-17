@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cp ../../../../cache/sources/linux-kernel-worktree/6.12__rockchip64__arm64/arch/arm64/boot/dts/rockchip/rk3328-klipad50.dtb \
+  rk3328-klipad50-kernel.dtb \
+  && dtc -I dtb -O dts -o rk3328-klipad50-kernel-decompiled.dts rk3328-klipad50-kernel.dtb
+
+cp ../../../../cache/sources/u-boot-worktree/u-boot/v2022.07/arch/arm/dts/rk3328-klipad50.dtb \
+  rk3328-klipad50-uboot.dtb \
+  && dtc -I dtb -O dts -o rk3328-klipad50-uboot-decompiled.dts rk3328-klipad50-uboot.dtb
+

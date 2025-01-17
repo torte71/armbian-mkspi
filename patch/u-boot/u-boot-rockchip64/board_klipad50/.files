@@ -7,6 +7,7 @@ Files in ./patch/u-boot/u-boot-rockchip64/board_klipad50:
 prepare_dtb				# helper: split common dts into kernel (copy) and uboot (via patch)
 build					# helper (prepare dts, compile)
 gen_reference_links			# helper: creates symlinks for reference (see below)
+decompile				# helper: decompile generated dtb (for comparison)
 
 klipad50org.dts				# 1. generated from sovol's rk3328-roc-cc.dtb
 klipad50tpl-full-pinctrl.dts		# 2. replaced decimal constants with variables
