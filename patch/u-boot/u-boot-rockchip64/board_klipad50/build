@@ -1,0 +1,12 @@
+#!/bin/bash
+
+./prepare.sh
+
+( cd ../../../.. ; \
+  ./compile.sh \
+  	BOARD=klipad50 \
+  	BRANCH=current \
+	RELEASE=bookworm \
+	BUILD_MINIMAL=no \
+	BUILD_DESKTOP=no \
+	KERNEL_CONFIGURE=no )

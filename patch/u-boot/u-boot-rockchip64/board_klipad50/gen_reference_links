@@ -1,0 +1,16 @@
+#!/bin/bash
+
+ln -s ../../../../cache/sources/linux-kernel-worktree/6.12__rockchip64__arm64/arch/arm64/boot/dts/rockchip/rk3328.dtsi \
+	rk3328_kernel.dtsi
+
+ln -s ../../../kernel/archive/rockchip64-6.12/dt/rk3328-klipad50.dts \
+	rk3328-klipad50.dts
+
+ln -s ../../../../cache/sources/linux-kernel-worktree/6.12__rockchip64__arm64/arch/arm64/boot/dts/rockchip/rk3328-klipad50.dts \
+	rk3328-klipad50-parsed-kernel.dts
+
+ln -s ../../../../cache/sources/u-boot-worktree/u-boot/v2022.07/arch/arm/dts/rk3328-klipad50.dts \
+	rk3328-klipad50-parsed-uboot.dts
+
+ln -s ../../../../cache/sources/u-boot-worktree/u-boot/v2022.07/arch/arm/dts/rk3328.dtsi \
+	rk3328_uboot.dtsi

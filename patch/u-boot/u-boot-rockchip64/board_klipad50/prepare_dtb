@@ -1,0 +1,46 @@
+#!/bin/bash
+
+INPUTFILE=klipad50tpl-old-after-EOF.dts
+REALNAME=rk3328-klipad50.dts
+UBOOTPATCH=02-mkspi-rk3328-add-uboot-dts.patch
+
+# ---- COMMON: split INPUTFILE into "uboot-only" and "kernel-only"  files ----
+
+strip_parts() {
+  mark=$1
+  # remove all lines between "---FOO-start---" and "---FOO-end---" markers
+  awk '/\/\/---'$mark'-end---/{f=0} !f{print} /\/\/---'$mark'-start---/{f=1}' $INPUTFILE \
+    | sed "/^\/\/-/d"
+    # strip all comment lines beginning with "//-" (keeps normal "//" comments)
+}
+
+ONLY_KERNEL_TMP=.only_kernel.dts
+ONLY_UBOOT_TMP=.only_uboot.dts
+
+strip_parts uboot  > $ONLY_KERNEL_TMP
+strip_parts kernel > $ONLY_UBOOT_TMP
+
+# ---- copy "kernel-only" file into KERNELDTB directory ----
+
+KERNELDTB=../../../kernel/archive/rockchip64-6.12/dt/
+cp -L $ONLY_KERNEL_TMP $KERNELDTB/$REALNAME
+
+# ---- generate patch from "uboot-only" file ----
+
+DIFFDIR="arch/arm/dts"
+DIFFDIR_A="a/$DIFFDIR"
+DIFFDIR_B="b/$DIFFDIR"
+
+[ -d .diffdir ] && rm -rf .diffdir
+mkdir .diffdir
+cd .diffdir
+
+mkdir -p $DIFFDIR_A
+mkdir -p $DIFFDIR_B
+cp ../$ONLY_UBOOT_TMP $DIFFDIR_B/$REALNAME
+
+echo "diff --git $DIFFDIR_A/$REALNAME $DIFFDIR_B/$REALNAME">../$UBOOTPATCH
+diff -uN $DIFFDIR_A/$REALNAME $DIFFDIR_B/$REALNAME>>../$UBOOTPATCH
+
+cd ..
+rm -rf .diffdir
