@@ -16,10 +16,10 @@
 	compatible = "firefly,roc-rk3328-cc", "rockchip,rk3328";
 
 	aliases {
-		mmc0 = &sdmmc;
-		mmc1 = &emmc;
 		ethernet0 = "/ethernet@ff540000";
 		ethernet1 = "/ethernet@ff550000";
+		mmc0 = &sdmmc;
+		mmc1 = &emmc;
 	};
 
 	chosen {
@@ -33,10 +33,14 @@
 		opp-786000000 {
 			opp-hz = /bits/ 64 <786000000>;
 			opp-microvolt = <1075000 1075000 12000000>;
+			//klipad:disabled
+			status = "disabled";
 		};
 		opp-798000000 {
 			opp-hz = /bits/ 64 <798000000>;
 			opp-microvolt = <1075000 1075000 12000000>;
+			//klipad:disabled
+			status = "disabled";
 		};
 		opp-840000000 {
 			opp-hz = /bits/ 64 <840000000>;
@@ -87,7 +91,7 @@
 //---kernel-start---
 		//armbian
 		//gpios = <&gpio2 RK_PC4 GPIO_ACTIVE_HIGH>;
-		//sovol
+		//klipad
 		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
 		//
 		pinctrl-0 = <&sdio_vcc_pin>;
@@ -99,7 +103,7 @@
 		//?gpios = <&grf_gpio 0 GPIO_ACTIVE_HIGH>;
 		//armbian/maxim
 		//gpio = <&gpio0 RK_PD6 GPIO_ACTIVE_LOW>;
-		//sovol
+		//klipad
 		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
 		//TM: why gpio[s]? why RK_PD4 vs. RK_PC4?
 		//----
@@ -242,7 +246,8 @@
 //- ----------------------------------------------------------------------
 
 &analog_sound {
-	status = "disabled";
+		simple-audio-card,name = "TRS Jack";
+		status = "okay";
 };
 //-	analog_sound: analog-sound {
 //-		compatible = "simple-audio-card";
@@ -549,7 +554,7 @@
 //-		//armbian
 //-		//------------------------------------------0x49=&hdmi_phy
 //-		clocks = <&cru PCLK_HDMI &cru SCLK_HDMI_SFC 0x49 &cru SCLK_RTC32K>;
-//-		//sovol
+//-		//klipad
 //-		//------------------------------------------0x4b=&hdmi_phy
 //-		clocks = <&cru PCLK_HDMI &cru SCLK_HDMI_SFC 0x4b &cru SCLK_RTC32K>;
 //-		//------------------------------------------
@@ -614,7 +619,10 @@
 		reg = <0x18>;
 //---kernel-start---
 		interrupt-parent = <&gpio2>;
-		interrupts = <RK_PA6 IRQ_TYPE_LEVEL_LOW>;
+		//interrupts = <RK_PA6 IRQ_TYPE_LEVEL_LOW>;
+		//error:klipad:RK_PC2 (0x18) IS 0x12 
+		//klipad:RK_PD0 (0x18)
+		interrupts = <RK_PD0 IRQ_TYPE_LEVEL_LOW>;
 //---kernel-end---
 //---uboot-start---
 		interrupt-parent = <&gpio1>;
@@ -639,8 +647,10 @@
 		regulators {
 			vdd_logic: DCDC_REG1 {
 				regulator-name = "vdd_logic";
-				regulator-min-microvolt = <712500>;
-				regulator-max-microvolt = <1450000>;
+				//regulator-min-microvolt = <712500>;
+				//regulator-max-microvolt = <1450000>;
+				regulator-min-microvolt = <1150000>;
+				regulator-max-microvolt = <1175000>;
 //---kernel-start---
 				regulator-ramp-delay    = <12500>;
 //---kernel-end---
@@ -654,7 +664,8 @@
 
 			vdd_arm: DCDC_REG2 {
 				regulator-name = "vdd_arm";
-				regulator-min-microvolt = <712500>;
+				//regulator-min-microvolt = <712500>;
+				regulator-min-microvolt = <1400000>;
 				regulator-max-microvolt = <1450000>;
 //---kernel-start---
 				regulator-ramp-delay    = <12500>;
@@ -861,10 +872,16 @@
 	status = "okay";
 };
 
+//---uboot-end---
 &i2s1 {
 	status = "okay";
 };
-//---uboot-end---
+
+&pwm3 {
+	//GIC_SPI=0x00 SCLK_TIMER3=0x32 IRQ_TYPE_LEVEL_HIGH=0x04
+	interrupts = <GIC_SPI SCLK_TIMER3 IRQ_TYPE_LEVEL_HIGH>;
+	//interrupts = <0x00 0x32 0x04>;
+};
 
 &io_domains {
 	status = "okay";
@@ -954,6 +971,11 @@
 //-	};
 
 &pinctrl {
+	rtc: rtc {
+		rtc_32k: rtc-32k {
+			rockchip,pins = <1 RK_PD4 1 &pcfg_pull_none>;
+		};
+	};
 
 	pmic {
 		pmic_int_l: pmic-int-l {
@@ -1000,7 +1022,7 @@
 // 	};
 
 	spi0_cs2 {
-	  	//sovol  :rockchip,pins = <0x03 0x07 0x00 __67>;
+	  	//klipad :rockchip,pins = <0x03 0x07 0x00 __67>;
 		//armbian:rockchip,pins = <0x01 0x12 0x00 __67>;
 		pinctrl_spi0_cs2: pinctrl_spi0_cs2 {
 			//rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
