@@ -18,6 +18,8 @@
 	aliases {
 		mmc0 = &sdmmc;
 		mmc1 = &emmc;
+		ethernet0 = "/ethernet@ff540000";
+		ethernet1 = "/ethernet@ff550000";
 	};
 
 	chosen {
@@ -83,14 +85,24 @@
 	vcc_sdio: sdmmcio-regulator {
 		compatible = "regulator-gpio";
 //---kernel-start---
-		gpios = <&gpio2 RK_PC4 GPIO_ACTIVE_HIGH>;
+		//armbian
+		//gpios = <&gpio2 RK_PC4 GPIO_ACTIVE_HIGH>;
+		//sovol
+		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
+		//
 		pinctrl-0 = <&sdio_vcc_pin>;
 		pinctrl-names = "default";
 		states = <1800000 0x0>,
 			 <3300000 0x1>;
 //---kernel-end---
 //---uboot-start---
-		gpios = <&grf_gpio 0 GPIO_ACTIVE_HIGH>;
+		//?gpios = <&grf_gpio 0 GPIO_ACTIVE_HIGH>;
+		//armbian/maxim
+		//gpio = <&gpio0 RK_PD6 GPIO_ACTIVE_LOW>;
+		//sovol
+		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
+		//TM: why gpio[s]? why RK_PD4 vs. RK_PC4?
+		//----
 		states = <1800000 0x1>,
 			 <3300000 0x0>;
 //---uboot-end---
@@ -201,6 +213,28 @@
 			status = "okay";
 		};
 	};
+
+	wireless_wlan: wireless-wlan {
+		compatible = "wlan-platdata";
+		rockchip,grf = <&grf>;
+		sdio_vref = <0xce4>;
+		status = "okay";
+		//CHECK
+		//WIFI,host_wake_irq = <0x29 0x13 0x00>;
+		WIFI,host_wake_irq = <&gpio1 0x13 0x00>;
+		wifi_chip_type = "rtl8723bs";
+	};
+
+	sdio_pwrseq0: sdio_pwrseq0 {
+		compatible = "mmc-pwrseq-simple";
+		pinctrl-names = "default";
+		//CHECK
+		pinctrl-0 = <&wifi_enable_h>;
+		//pinctrl-0 = <&sdio_pwrseq>;
+		//reset-gpios = <0x29 0x12 0x01>;
+		reset-gpios = <&gpio1 0x12 0x01>;
+	};
+
 //---kernel-end---
 
 };
@@ -510,6 +544,16 @@
 //-		reg-io-width = <4>;
 //-		interrupts = <GIC_SPI 35 IRQ_TYPE_LEVEL_HIGH>,
 //-			     <GIC_SPI 71 IRQ_TYPE_LEVEL_HIGH>;
+//-		//------------------------------------------
+//-		//armbian
+//-		//------------------------------------------0x49=&hdmi_phy
+//-		clocks = <&cru PCLK_HDMI &cru SCLK_HDMI_SFC 0x49 &cru SCLK_RTC32K>;
+//-		//sovol
+//-		//------------------------------------------0x4b=&hdmi_phy
+//-		clocks = <&cru PCLK_HDMI &cru SCLK_HDMI_SFC 0x4b &cru SCLK_RTC32K>;
+//-		//------------------------------------------
+//-		//TM: why does <&hdmi_phy> appear in clocks?
+//-		//------------------------------------------
 //-		clocks = <&cru PCLK_HDMI>,
 //-			 <&cru SCLK_HDMI_SFC>,
 //-			 <&cru SCLK_RTC32K>;
@@ -542,7 +586,8 @@
 //-	};
 
 &hdmi_sound {
-	status = "okay";
+	//status = "okay";
+	status = "disabled";
 };
 //-	hdmi_sound: hdmi-sound {
 //-		compatible = "simple-audio-card";
@@ -938,26 +983,43 @@
 		};
 	};
 
-	touchscreen {
-		pinctrl_tsc2046_pendown: pinctrl_tsc2046_pendown {
-			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_up>;
-		};
-		pinctrl_tsc2046_cs: pinctrl_tsc2046_cs {
+//	touchscreen {
+//		pinctrl_tsc2046_pendown: pinctrl_tsc2046_pendown {
+//			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_up>;
+//		};
+//		pinctrl_tsc2046_cs: pinctrl_tsc2046_cs {
+//			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
+//		};
+//	};
+//
+//	lcd {
+//		pinctrl_st7796_cs: pinctrl_st7796_cs {
+//			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
+// 		};
+// 	};
+
+	spi0_cs2 {
+	  	//sovol  :rockchip,pins = <0x03 0x07 0x00 __67>;
+		//armbian:rockchip,pins = <0x01 0x12 0x00 __67>;
+		pinctrl_spi0_cs2: pinctrl_spi0_cs2 {
+			//rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
 			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
+ 		};
+ 	};
+
+	sdio_pwrseq: sdio-pwrseq {
+
+		wifi_enable_h: wifi-enable-h {
+			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 
-	lcd {
-		pinctrl_st7796_cs: pinctrl_st7796_cs {
-			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
+	wireless_wlan_pin: wireless-wlan {
 
-	spi0_cs2 {
-		pinctrl_spi0_cs2: pinctrl_spi0_cs2 {
-			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
+		wifi_wake_host: wifi-wake-host {
+			rockchip,pins = <1 RK_PC3 RK_FUNC_GPIO &pcfg_pull_down>;
+		};
+	};
 //---kernel-end---
 };
 //-	pinctrl: pinctrl {
@@ -1815,7 +1877,7 @@
 //-			//CHECK
 //-			hdmi_backlight: hdmi-backlight {
 //-				//rockchip,pins = <0x03 0x05 0x00 0xaf>;
-//-				rockchip,pins = <3 RK_PA5 0 &pcfg_output_high>;
+//-				rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_output_high>;
 //-			};
 //-		};
 //-
@@ -1968,7 +2030,8 @@
 //---kernel-start---
 &spdif {
 	pinctrl-0 = <&spdifm0_tx>;
-	status = "okay";
+	//status = "okay";
+	status = "disabled";
 };
 //---kernel-end---
 //-	spdif: spdif@ff030000 {
@@ -1987,7 +2050,8 @@
 
 //---kernel-start---
 &spdif_out {
-	status = "okay";
+	//status = "okay";
+	status = "disabled";
 };
 //---kernel-end---
 //-	spdif_out: spdif-out {
@@ -1998,7 +2062,8 @@
 
 //---kernel-start---
 &spdif_sound {
- 	status = "okay";
+ 	//status = "okay";
+ 	status = "disabled";
 };
 //---kernel-end---
 //-	//CHECK
@@ -2133,53 +2198,57 @@
 //---kernel-start---
 &spi0 {
 	max-freq = <48000000>;
-	cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>,<&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
+	//cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>,<&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
+	//wifi:sdio-pwrseq uses <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>
+	cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>;
 	pinctrl-0 = <&spi0m2_clk &spi0m2_tx &spi0m2_rx>;
 	status = "okay";
 
-	spi_for_lcd@0 {
-		compatible ="ilitek,st7796";
-		pinctrl-names ="default";
-		pinctrl-0 = <&pinctrl_st7796_cs>;
+//-	spi_for_lcd@0 {
+//-		compatible ="ilitek,st7796";
+//-		pinctrl-names ="default";
+//-		pinctrl-0 = <&pinctrl_st7796_cs>;
+//-		reg = <0>;
+//-		spi-max-frequency = <25000000>;
+//-		bgr;
+//-		fps = <30>;
+//-		rotate = <270>;
+//-		buswidth = <8>;
+//-		dc-gpios = <&gpio3 RK_PA6 GPIO_ACTIVE_HIGH>;  /* gpio3 A6 */
+//-		reset-gpios = <&gpio3 RK_PA4 GPIO_ACTIVE_LOW>; /* gpio3 A4 */
+//-		led-gpios = <&gpio3 RK_PA5 GPIO_ACTIVE_HIGH>;  /* gpio3 A5 */
+//-		status = "okay";
+//-	};
+//-
+//-	spi_for_touch@1 {
+//-		reg = <1>;
+//-		compatible = "ti,tsc2046";
+//-		pinctrl-names ="default";
+//-		pinctrl-0 = <&pinctrl_tsc2046_pendown &pinctrl_tsc2046_cs>;
+//-		ti,x-max = /bits/ 16 <3776>;
+//-		ti,x-min = /bits/ 16 <164>;
+//-		ti,y-min = /bits/ 16 <201>;
+//-		ti,y-max = /bits/ 16 <3919>;
+//-		ti,x-plate-ohms = /bits/ 16 <40>;
+//-		ti,pressure-max = /bits/ 16 <255>;
+//-		//touchscreen-fuzz-x = <16>;
+//-		//touchscreen-fuzz-y = <16>;
+//-		//touchscreen-fuzz-pressure = <10>;
+//-		ti,swap-xy = <1>;
+//-		touchscreen-inverted-y = <1>;
+//-		interrupt-parent = <&gpio1>;
+//-		interrupts = <RK_PC6 GPIO_ACTIVE_LOW>;
+//-		spi-max-frequency = <2000000>;
+//-		pendown-gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_LOW>;
+//-		vcc-supply = <&vcc_io>;
+//-		wakeup-source;
+//-		status = "okay";
+//-	};
+
+//-	spi_for_cs2@2 {
+//-		reg = <2>;
+	spi_for_cs2@0 {
 		reg = <0>;
-		spi-max-frequency = <25000000>;
-		bgr;
-		fps = <30>;
-		rotate = <270>;
-		buswidth = <8>;
-		dc-gpios = <&gpio3 RK_PA6 GPIO_ACTIVE_HIGH>;  /* gpio3 A6 */
-		reset-gpios = <&gpio3 RK_PA4 GPIO_ACTIVE_LOW>; /* gpio3 A4 */
-		led-gpios = <&gpio3 RK_PA5 GPIO_ACTIVE_HIGH>;  /* gpio3 A5 */
-		status = "okay";
-	};
-
-	spi_for_touch@1 {
-		reg = <1>;
-		compatible = "ti,tsc2046";
-		pinctrl-names ="default";
-		pinctrl-0 = <&pinctrl_tsc2046_pendown &pinctrl_tsc2046_cs>;
-		ti,x-max = /bits/ 16 <3776>;
-		ti,x-min = /bits/ 16 <164>;
-		ti,y-min = /bits/ 16 <201>;
-		ti,y-max = /bits/ 16 <3919>;
-		ti,x-plate-ohms = /bits/ 16 <40>;
-		ti,pressure-max = /bits/ 16 <255>;
-		//touchscreen-fuzz-x = <16>;
-		//touchscreen-fuzz-y = <16>;
-		//touchscreen-fuzz-pressure = <10>;
-		ti,swap-xy = <1>;
-		touchscreen-inverted-y = <1>;
-		interrupt-parent = <&gpio1>;
-		interrupts = <RK_PC6 GPIO_ACTIVE_LOW>;
-		spi-max-frequency = <2000000>;
-		pendown-gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_LOW>;
-		vcc-supply = <&vcc_io>;
-		wakeup-source;
-		status = "okay";
-	};
-
-	spi_for_cs2@2 {
-		reg = <2>;
 		compatible ="armbian,spi-dev";
 		pinctrl-names ="default";
 		pinctrl-0 = <&pinctrl_spi0_cs2>;
@@ -2213,6 +2282,23 @@
 //-			status = "okay";
 //-		};
 //-	};
+//tm start
+//---kernel-start---
+//tm:sdio:mmc@ff510000 required for wlan:mmc-pwrseq
+&sdio {
+		pinctrl-names = "default";
+		//required
+		pinctrl-0 = <&sdmmc1_bus4 &sdmmc1_cmd &sdmmc1_clk>;
+		mmc-pwrseq = <&sdio_pwrseq0>;
+		status = "okay";
+		non-removable;
+		bus-width = <0x04>;
+		//optional
+		cap-sd-highspeed;
+		cap-sdio-irq;
+};
+//---kernel-end---
+//tm end
 
 &usb20_otg {
 	dr_mode = "host";
@@ -2327,6 +2413,7 @@
 //-		#iommu-cells = <0>;
 //-		status = "okay";
 //-	};
+
 
 //- ----------------------------------------------------------------------
 //- EOF
@@ -2926,6 +3013,7 @@
 //-//
 //-//			pinctrl_spi0_cs2: pinctrl_spi0_cs2 {
 //-//				rockchip,pins = <3 RK_PA7 0 &pcfg_pull_up>;
+//-//				//rockchip,pins = <1 RK_PC2 0 &pcfg_pull_up>;
 //-//			};
 //-//		};
 //-//
