@@ -535,6 +535,7 @@
 		      "isfr",
 		      "vpll",
 		      "cec";
+	pinctrl-0 = <&hdmi_cec &hdmii2c_xfer &hdmi_hpd &hdmi_backlight>;
 //---kernel-end---
 	status = "okay";
 };
@@ -1021,6 +1022,13 @@
 		};
 	};
 //---kernel-end---
+
+	hdmi_pin {
+			hdmi_backlight: hdmi-backlight {
+				//rockchip,pins = <0x03 0x05 0x00 0xaf>;
+				rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_output_high>;
+			};
+	};
 };
 //-	pinctrl: pinctrl {
 //-		compatible = "rockchip,rk3328-pinctrl";
@@ -2200,7 +2208,9 @@
 	max-freq = <48000000>;
 	//cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>,<&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
 	//wifi:sdio-pwrseq uses <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>
-	cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>;
+	//cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>;
+	// RK_PB0 (0x08) required for hdmi
+	cs-gpios = <&gpio3 RK_PA7 GPIO_ACTIVE_LOW>;
 	pinctrl-0 = <&spi0m2_clk &spi0m2_tx &spi0m2_rx>;
 	status = "okay";
 
