@@ -33,13 +33,13 @@
 		opp-786000000 {
 			opp-hz = /bits/ 64 <786000000>;
 			opp-microvolt = <1075000 1075000 12000000>;
-			//klipad:disabled
+//-			//klipad:disabled
 			status = "disabled";
 		};
 		opp-798000000 {
 			opp-hz = /bits/ 64 <798000000>;
 			opp-microvolt = <1075000 1075000 12000000>;
-			//klipad:disabled
+//-			//klipad:disabled
 			status = "disabled";
 		};
 		opp-840000000 {
@@ -89,24 +89,24 @@
 	vcc_sdio: sdmmcio-regulator {
 		compatible = "regulator-gpio";
 //---kernel-start---
-		//armbian
-		//gpios = <&gpio2 RK_PC4 GPIO_ACTIVE_HIGH>;
-		//klipad
+//-		//armbian
+//-		//gpios = <&gpio2 RK_PC4 GPIO_ACTIVE_HIGH>;
+//-		//klipad
 		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
-		//
+//-		//
 		pinctrl-0 = <&sdio_vcc_pin>;
 		pinctrl-names = "default";
 		states = <1800000 0x0>,
 			 <3300000 0x1>;
 //---kernel-end---
 //---uboot-start---
-		//?gpios = <&grf_gpio 0 GPIO_ACTIVE_HIGH>;
-		//armbian/maxim
-		//gpio = <&gpio0 RK_PD6 GPIO_ACTIVE_LOW>;
-		//klipad
+//-		//?gpios = <&grf_gpio 0 GPIO_ACTIVE_HIGH>;
+//-		//armbian/maxim
+//-		//gpio = <&gpio0 RK_PD6 GPIO_ACTIVE_LOW>;
+//-		//klipad
 		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
-		//TM: why gpio[s]? why RK_PD4 vs. RK_PC4?
-		//----
+//-		//TM: why gpio[s]? why RK_PD4 vs. RK_PC4?
+//-		//----
 		states = <1800000 0x1>,
 			 <3300000 0x0>;
 //---uboot-end---
@@ -223,8 +223,8 @@
 		rockchip,grf = <&grf>;
 		sdio_vref = <0xce4>;
 		status = "okay";
-		//CHECK
-		//WIFI,host_wake_irq = <0x29 0x13 0x00>;
+//-		//CHECK
+//-		//WIFI,host_wake_irq = <0x29 0x13 0x00>;
 		WIFI,host_wake_irq = <&gpio1 0x13 0x00>;
 		wifi_chip_type = "rtl8723bs";
 	};
@@ -232,10 +232,10 @@
 	sdio_pwrseq0: sdio_pwrseq0 {
 		compatible = "mmc-pwrseq-simple";
 		pinctrl-names = "default";
-		//CHECK
+//-		//CHECK
 		pinctrl-0 = <&wifi_enable_h>;
-		//pinctrl-0 = <&sdio_pwrseq>;
-		//reset-gpios = <0x29 0x12 0x01>;
+//-		//pinctrl-0 = <&sdio_pwrseq>;
+//-		//reset-gpios = <0x29 0x12 0x01>;
 		reset-gpios = <&gpio1 0x12 0x01>;
 	};
 
@@ -592,7 +592,7 @@
 //-	};
 
 &hdmi_sound {
-	//status = "okay";
+//-	//status = "okay";
 	status = "disabled";
 };
 //-	hdmi_sound: hdmi-sound {
@@ -619,9 +619,9 @@
 		reg = <0x18>;
 //---kernel-start---
 		interrupt-parent = <&gpio2>;
-		//interrupts = <RK_PA6 IRQ_TYPE_LEVEL_LOW>;
-		//error:klipad:RK_PC2 (0x18) IS 0x12 
-		//klipad:RK_PD0 (0x18)
+//-		//interrupts = <RK_PA6 IRQ_TYPE_LEVEL_LOW>;
+//-		//error:klipad:RK_PC2 (0x18) IS 0x12 
+//-		//klipad:RK_PD0 (0x18)
 		interrupts = <RK_PD0 IRQ_TYPE_LEVEL_LOW>;
 //---kernel-end---
 //---uboot-start---
@@ -647,8 +647,8 @@
 		regulators {
 			vdd_logic: DCDC_REG1 {
 				regulator-name = "vdd_logic";
-				//regulator-min-microvolt = <712500>;
-				//regulator-max-microvolt = <1450000>;
+//-				//regulator-min-microvolt = <712500>;
+//-				//regulator-max-microvolt = <1450000>;
 				regulator-min-microvolt = <1150000>;
 				regulator-max-microvolt = <1175000>;
 //---kernel-start---
@@ -664,7 +664,7 @@
 
 			vdd_arm: DCDC_REG2 {
 				regulator-name = "vdd_arm";
-				//regulator-min-microvolt = <712500>;
+//-				//regulator-min-microvolt = <712500>;
 				regulator-min-microvolt = <1400000>;
 				regulator-max-microvolt = <1450000>;
 //---kernel-start---
@@ -878,9 +878,9 @@
 };
 
 &pwm3 {
-	//GIC_SPI=0x00 SCLK_TIMER3=0x32 IRQ_TYPE_LEVEL_HIGH=0x04
+//-	//GIC_SPI=0x00 SCLK_TIMER3=0x32 IRQ_TYPE_LEVEL_HIGH=0x04
 	interrupts = <GIC_SPI SCLK_TIMER3 IRQ_TYPE_LEVEL_HIGH>;
-	//interrupts = <0x00 0x32 0x04>;
+//-	//interrupts = <0x00 0x32 0x04>;
 };
 
 &io_domains {
@@ -1006,29 +1006,20 @@
 		};
 	};
 
-//	touchscreen {
-//		pinctrl_tsc2046_pendown: pinctrl_tsc2046_pendown {
-//			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_up>;
-//		};
-//		pinctrl_tsc2046_cs: pinctrl_tsc2046_cs {
-//			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
-//		};
-//	};
-//
-//	lcd {
-//		pinctrl_st7796_cs: pinctrl_st7796_cs {
-//			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
-// 		};
-// 	};
-
-	spi0_cs2 {
-	  	//klipad :rockchip,pins = <0x03 0x07 0x00 __67>;
-		//armbian:rockchip,pins = <0x01 0x12 0x00 __67>;
-		pinctrl_spi0_cs2: pinctrl_spi0_cs2 {
-			//rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
-			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
+//-	touchscreen {
+//-		pinctrl_tsc2046_pendown: pinctrl_tsc2046_pendown {
+//-			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_up>;
+//-		};
+//-		pinctrl_tsc2046_cs: pinctrl_tsc2046_cs {
+//-			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
+//-		};
+//-	};
+//-
+//-	lcd {
+//-		pinctrl_st7796_cs: pinctrl_st7796_cs {
+//-			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
+//- 		};
+//- 	};
 
 	sdio_pwrseq: sdio-pwrseq {
 
@@ -1043,14 +1034,23 @@
 			rockchip,pins = <1 RK_PC3 RK_FUNC_GPIO &pcfg_pull_down>;
 		};
 	};
-//---kernel-end---
 
 	hdmi_pin {
-			hdmi_backlight: hdmi-backlight {
-				//rockchip,pins = <0x03 0x05 0x00 0xaf>;
-				rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_output_high>;
-			};
+		hdmi_backlight: hdmi-backlight {
+			//rockchip,pins = <0x03 0x05 0x00 0xaf>;
+			rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_output_high>;
+		};
 	};
+
+	spi0_cs2 {
+//-	  	//klipad :rockchip,pins = <0x03 0x07 0x00 __67>;
+//-		//armbian:rockchip,pins = <0x01 0x12 0x00 __67>;
+		pinctrl_spi0_cs2: pinctrl_spi0_cs2 {
+//-			//rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
+			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
+ 		};
+ 	};
+//---kernel-end---
 };
 //-	pinctrl: pinctrl {
 //-		compatible = "rockchip,rk3328-pinctrl";
@@ -2060,7 +2060,7 @@
 //---kernel-start---
 &spdif {
 	pinctrl-0 = <&spdifm0_tx>;
-	//status = "okay";
+//-	//status = "okay";
 	status = "disabled";
 };
 //---kernel-end---
@@ -2080,7 +2080,7 @@
 
 //---kernel-start---
 &spdif_out {
-	//status = "okay";
+//-	//status = "okay";
 	status = "disabled";
 };
 //---kernel-end---
@@ -2092,7 +2092,7 @@
 
 //---kernel-start---
 &spdif_sound {
- 	//status = "okay";
+//- 	//status = "okay";
  	status = "disabled";
 };
 //---kernel-end---
@@ -2143,9 +2143,11 @@
 &u2phy {
 	status = "okay";
 };
+
 &u2phy_host {
 	status = "okay";
 };
+
 &u2phy_otg {
 	status = "okay";
 };
@@ -2228,10 +2230,10 @@
 //---kernel-start---
 &spi0 {
 	max-freq = <48000000>;
-	//cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>,<&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
-	//wifi:sdio-pwrseq uses <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>
-	//cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>;
-	// RK_PB0 (0x08) required for hdmi
+//-	//cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>,<&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
+//-	//wifi:sdio-pwrseq uses <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>
+//-	//cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>;
+//-	// RK_PB0 (0x08) required for hdmi
 	cs-gpios = <&gpio3 RK_PA7 GPIO_ACTIVE_LOW>;
 	pinctrl-0 = <&spi0m2_clk &spi0m2_tx &spi0m2_rx>;
 	status = "okay";
@@ -2314,23 +2316,23 @@
 //-			status = "okay";
 //-		};
 //-	};
-//tm start
+//-tm start
 //---kernel-start---
-//tm:sdio:mmc@ff510000 required for wlan:mmc-pwrseq
+//-tm:sdio:mmc@ff510000 required for wlan:mmc-pwrseq
 &sdio {
-		pinctrl-names = "default";
-		//required
-		pinctrl-0 = <&sdmmc1_bus4 &sdmmc1_cmd &sdmmc1_clk>;
-		mmc-pwrseq = <&sdio_pwrseq0>;
-		status = "okay";
-		non-removable;
-		bus-width = <0x04>;
-		//optional
-		cap-sd-highspeed;
-		cap-sdio-irq;
+	pinctrl-names = "default";
+//-	//required
+	pinctrl-0 = <&sdmmc1_bus4 &sdmmc1_cmd &sdmmc1_clk>;
+	mmc-pwrseq = <&sdio_pwrseq0>;
+	status = "okay";
+	non-removable;
+	bus-width = <0x04>;
+//-	//optional
+	cap-sd-highspeed;
+	cap-sdio-irq;
 };
 //---kernel-end---
-//tm end
+//-tm end
 
 &usb20_otg {
 	dr_mode = "host";
@@ -2445,12 +2447,9 @@
 //-		#iommu-cells = <0>;
 //-		status = "okay";
 //-	};
-
-
 //- ----------------------------------------------------------------------
 //- EOF
 //- ----------------------------------------------------------------------
-
 //-	arm-pmu {
 //-		compatible = "arm,cortex-a53-pmu";
 //-		interrupts = <GIC_SPI 100 IRQ_TYPE_LEVEL_HIGH>,
@@ -3081,7 +3080,6 @@
 //-		pinctrl-0 = <&sdio_pwrseq>;
 //-		reset-gpios = <0x29 0x12 0x01>;
 //-	};
-
 //-	__symbols__ {
 //-		ddr_timing = "/ddr_timing";
 //-		cpu0 = "/cpus/cpu@0";
