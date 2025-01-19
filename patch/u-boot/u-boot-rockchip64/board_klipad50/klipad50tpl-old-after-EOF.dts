@@ -88,28 +88,14 @@
 
 	vcc_sdio: sdmmcio-regulator {
 		compatible = "regulator-gpio";
-//---kernel-start---
 //-		//armbian
 //-		//gpios = <&gpio2 RK_PC4 GPIO_ACTIVE_HIGH>;
 //-		//klipad
 		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
-//-		//
 		pinctrl-0 = <&sdio_vcc_pin>;
 		pinctrl-names = "default";
 		states = <1800000 0x0>,
 			 <3300000 0x1>;
-//---kernel-end---
-//---uboot-start---
-//-		//?gpios = <&grf_gpio 0 GPIO_ACTIVE_HIGH>;
-//-		//armbian/maxim
-//-		//gpio = <&gpio0 RK_PD6 GPIO_ACTIVE_LOW>;
-//-		//klipad
-		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
-//-		//TM: why gpio[s]? why RK_PD4 vs. RK_PC4?
-//-		//----
-		states = <1800000 0x1>,
-			 <3300000 0x0>;
-//---uboot-end---
 		regulator-name = "vcc_sdio";
 		regulator-type = "voltage";
 		regulator-min-microvolt = <1800000>;
@@ -126,12 +112,7 @@
 	vcc_host1_5v: vcc_otg_5v: vcc-host1-5v-regulator {
 		compatible = "regulator-fixed";
 		enable-active-high;
-//---kernel-start---
 		gpio = <&gpio0 RK_PA2 GPIO_ACTIVE_HIGH>;
-//---kernel-end---
-//---uboot-start---
-		gpio = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
-//---uboot-end---
 		pinctrl-names = "default";
 		pinctrl-0 = <&usb20_host_drv>;
 		regulator-name = "vcc_host1_5v";
@@ -176,7 +157,6 @@
 		};
 	};
 
-//---kernel-start---
 	usb3phy_grf: syscon@ff460000 {
 		compatible = "rockchip,usb3phy-grf", "syscon";
 		reg = <0x0 0xff460000 0x0 0x1000>;
@@ -238,9 +218,6 @@
 //-		//reset-gpios = <0x29 0x12 0x01>;
 		reset-gpios = <&gpio1 0x12 0x01>;
 	};
-
-//---kernel-end---
-
 };
 //- ^^^ watch that bracket!
 //- ----------------------------------------------------------------------
@@ -278,7 +255,6 @@
 //-		status = "okay";
 //-	};
 
-//---kernel-start---
 &gmac2phy {
 	assigned-clocks = <&cru SCLK_MAC2PHY>;
 	assigned-clock-rate = <50000000>;
@@ -329,6 +305,7 @@
 //-			};
 //-		};
 //-	};
+//---kernel-start---
 
 &dfi {
 	status = "okay";
@@ -450,12 +427,7 @@
 	snps,txpbl = <0x4>;
 	tx_delay = <0x24>;
 	rx_delay = <0x18>;
-//---kernel-start---
 	status = "disabled";
-//---kernel-end---
-//---uboot-start---
-	status = "okay";
-//---uboot-end---
 };
 //-	gmac2io: ethernet@ff540000 {
 //-		compatible = "rockchip,rk3328-gmac";
@@ -496,11 +468,11 @@
 //-		rx_delay = <0x18>;
 //-	};
 
-//---kernel-start---
+//---kernel-zzz-start---
 &gpu {
 	mali-supply = <&vdd_logic>;
 };
-//---kernel-end---
+//---kernel-zzz-end---
 //-	gpu: gpu@ff300000 {
 //-		compatible = "rockchip,rk3328-mali", "arm,mali-450";
 //-		reg = <0x0 0xff300000 0x0 0x40000>;
@@ -529,7 +501,6 @@
 //-	};
 
 &hdmi {
-//---kernel-start---
 	interrupts = <GIC_SPI 35 IRQ_TYPE_LEVEL_HIGH>,
 		     <GIC_SPI 71 IRQ_TYPE_LEVEL_HIGH>;
 	clocks = <&cru PCLK_HDMI>,
@@ -541,7 +512,6 @@
 		      "vpll",
 		      "cec";
 	pinctrl-0 = <&hdmi_cec &hdmii2c_xfer &hdmi_hpd &hdmi_backlight>;
-//---kernel-end---
 	status = "okay";
 };
 //-	hdmi: hdmi@ff3c0000 {
@@ -617,17 +587,11 @@
 	rk805: pmic@18 {
 		compatible = "rockchip,rk805";
 		reg = <0x18>;
-//---kernel-start---
 		interrupt-parent = <&gpio2>;
 //-		//interrupts = <RK_PA6 IRQ_TYPE_LEVEL_LOW>;
 //-		//error:klipad:RK_PC2 (0x18) IS 0x12 
 //-		//klipad:RK_PD0 (0x18)
 		interrupts = <RK_PD0 IRQ_TYPE_LEVEL_LOW>;
-//---kernel-end---
-//---uboot-start---
-		interrupt-parent = <&gpio1>;
-		interrupts = <24 IRQ_TYPE_LEVEL_LOW>;
-//---uboot-end---
 		#clock-cells = <1>;
 		clock-output-names = "xin32k", "rk805-clkout2";
 		gpio-controller;
@@ -651,9 +615,9 @@
 //-				//regulator-max-microvolt = <1450000>;
 				regulator-min-microvolt = <1150000>;
 				regulator-max-microvolt = <1175000>;
-//---kernel-start---
+//---kernel-zzz-start---
 				regulator-ramp-delay    = <12500>;
-//---kernel-end---
+//---kernel-zzz-end---
 				regulator-always-on;
 				regulator-boot-on;
 				regulator-state-mem {
@@ -667,9 +631,9 @@
 //-				//regulator-min-microvolt = <712500>;
 				regulator-min-microvolt = <1400000>;
 				regulator-max-microvolt = <1450000>;
-//---kernel-start---
+//---kernel-zzz-start---
 				regulator-ramp-delay    = <12500>;
-//---kernel-end---
+//---kernel-zzz-end---
 				regulator-always-on;
 				regulator-boot-on;
 				regulator-state-mem {
@@ -867,12 +831,6 @@
 //-		};
 //-	};
 
-//---uboot-start---
-&i2s0 {
-	status = "okay";
-};
-
-//---uboot-end---
 &i2s1 {
 	status = "okay";
 };
@@ -979,27 +937,16 @@
 
 	pmic {
 		pmic_int_l: pmic-int-l {
-//---kernel-start---
 			rockchip,pins = <2 RK_PA6 RK_FUNC_GPIO &pcfg_pull_up>;
-//---kernel-end---
-//---uboot-start---
-			rockchip,pins = <1 RK_PD0 RK_FUNC_GPIO &pcfg_pull_up>;
-//---uboot-end---
 		};
 	};
 
 	usb2 {
 		usb20_host_drv: usb20-host-drv {
-//---kernel-start---
 			rockchip,pins = <0 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
-//---kernel-end---
-//---uboot-start---
-			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
-//---uboot-end---
 		};
 	};
 
-//---kernel-start---
 	sd {
 		sdio_vcc_pin: sdio-vcc-pin {
 			rockchip,pins = <2 RK_PC4 RK_FUNC_GPIO &pcfg_pull_up>;
@@ -1050,7 +997,6 @@
 			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
  		};
  	};
-//---kernel-end---
 };
 //-	pinctrl: pinctrl {
 //-		compatible = "rockchip,rk3328-pinctrl";
@@ -2057,13 +2003,11 @@
 //-		vqmmc-supply = <&vcc_sdio>;
 //-	};
 
-//---kernel-start---
 &spdif {
 	pinctrl-0 = <&spdifm0_tx>;
 //-	//status = "okay";
 	status = "disabled";
 };
-//---kernel-end---
 //-	spdif: spdif@ff030000 {
 //-		compatible = "rockchip,rk3328-spdif";
 //-		reg = <0x0 0xff030000 0x0 0x1000>;
@@ -2112,10 +2056,8 @@
 //-	};
 
 &tsadc {
-//---kernel-start---
 	rockchip,hw-tshut-mode = <0>;     /* tshut mode 0:CRU 1:GPIO */
 	rockchip,hw-tshut-polarity = <0>; /* tshut polarity 0:LOW 1:HIGH */
-//---kernel-end---
 	status = "okay";
 };
 //-	tsadc: tsadc@ff250000 {
@@ -2188,12 +2130,10 @@
 //-		};
 //-	};
 
-//---kernel-start---
 &uart0 {
 	pinctrl-0 = <&uart0_xfer &uart0_cts>;
  	status = "okay";
 };
-//---kernel-end---
 //-	uart0: serial@ff110000 {
 //-		compatible = "rockchip,rk3328-uart", "snps,dw-apb-uart";
 //-		reg = <0x0 0xff110000 0x0 0x100>;
@@ -2227,7 +2167,6 @@
 //-		status = "okay";
 //-	};
 
-//---kernel-start---
 &spi0 {
 	max-freq = <48000000>;
 //-	//cs-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>,<&gpio3 RK_PA7 GPIO_ACTIVE_LOW>,<&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
@@ -2290,7 +2229,6 @@
 		status = "okay";
 	};
 };
-//---kernel-end---
 //-	spi0: spi@ff190000 {
 //-		compatible = "rockchip,rk3328-spi", "rockchip,rk3066-spi";
 //-		reg = <0x0 0xff190000 0x0 0x1000>;
@@ -2317,7 +2255,6 @@
 //-		};
 //-	};
 //-tm start
-//---kernel-start---
 //-tm:sdio:mmc@ff510000 required for wlan:mmc-pwrseq
 &sdio {
 	pinctrl-names = "default";
@@ -2331,7 +2268,6 @@
 	cap-sd-highspeed;
 	cap-sdio-irq;
 };
-//---kernel-end---
 //-tm end
 
 &usb20_otg {
@@ -2406,10 +2342,8 @@
 //-	};
 
 &vop {
-//---kernel-start---
 	assigned-clocks = <&cru DCLK_LCDC>;
 	assigned-clock-parents = <&cru HDMIPHY>;
-//---kernel-end---
 	status = "okay";
 };
 //-	vop: vop@ff370000 {
