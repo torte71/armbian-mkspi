@@ -2382,6 +2382,23 @@
 //-		#iommu-cells = <0>;
 //-		status = "okay";
 //-	};
+
+//- disable /dev/video1 + /dev/media0
+&vpu {
+  	status = "disabled";
+};
+
+//---kernel-start---
+//- disable /dev/video2 + /dev/media1
+&vdec {
+  	status = "disabled";
+};
+
+//- disable /dev/video0
+&rga {
+  	status = "disabled";
+};
+//---kernel-end---
 //- ----------------------------------------------------------------------
 //- EOF
 //- ----------------------------------------------------------------------
