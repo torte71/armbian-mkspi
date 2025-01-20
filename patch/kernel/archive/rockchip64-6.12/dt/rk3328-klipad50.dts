@@ -23,6 +23,7 @@
 	chosen {
 		stdout-path = "serial2:1500000n8";
 	};
+
 	/delete-node/ dmc-opp-table;
 	dmc_opp_table: dmc-opp-table {
 		compatible = "operating-points-v2";
@@ -186,9 +187,9 @@
 	wireless_wlan: wireless-wlan {
 		compatible = "wlan-platdata";
 		rockchip,grf = <&grf>;
-		sdio_vref = <0xce4>;
+		sdio_vref = <3300>;
 		status = "okay";
-		WIFI,host_wake_irq = <&gpio1 0x13 0x00>;
+		WIFI,host_wake_irq = <&gpio1 RK_PC3 GPIO_ACTIVE_HIGH>;
 		wifi_chip_type = "rtl8723bs";
 	};
 
@@ -196,7 +197,7 @@
 		compatible = "mmc-pwrseq-simple";
 		pinctrl-names = "default";
 		pinctrl-0 = <&wifi_enable_h>;
-		reset-gpios = <&gpio1 0x12 0x01>;
+		reset-gpios = <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
 	};
 };
 
@@ -476,7 +477,6 @@
 
 	hdmi_pin {
 		hdmi_backlight: hdmi-backlight {
-			//rockchip,pins = <0x03 0x05 0x00 0xaf>;
 			rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_output_high>;
 		};
 	};
