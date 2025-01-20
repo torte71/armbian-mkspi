@@ -261,7 +261,7 @@
 	assigned-clock-rate = <50000000>;
 	assigned-clock-parents = <&cru SCLK_MAC2PHY_SRC>;
 	phy-supply = <&vcc_phy>;
- 	status = "okay";
+ 	status = "disabled";
 };
 //-	gmac2phy: ethernet@ff550000 {
 //-		compatible = "rockchip,rk3328-gmac";
