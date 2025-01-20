@@ -599,3 +599,15 @@
 &vop_mmu {
 	status = "okay";
 };
+
+&vpu {
+  	status = "disabled";
+};
+
+&vdec {
+  	status = "disabled";
+};
+
+&rga {
+  	status = "disabled";
+};
