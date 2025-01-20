@@ -12,8 +12,8 @@
 #include "rk3328.dtsi"
 
 / {
-	model = "Firefly roc-rk3328-cc";
-	compatible = "firefly,roc-rk3328-cc", "rockchip,rk3328";
+	model = "Makerbase MKS-KLIPAD50";
+	compatible = "mks,rk3328-klipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
 
 	aliases {
 		ethernet0 = "/ethernet@ff540000";
@@ -25,6 +25,7 @@
 	chosen {
 		stdout-path = "serial2:1500000n8";
 	};
+
 //---kernel-start---
 	/delete-node/ dmc-opp-table;
 	dmc_opp_table: dmc-opp-table {
@@ -201,11 +202,11 @@
 	wireless_wlan: wireless-wlan {
 		compatible = "wlan-platdata";
 		rockchip,grf = <&grf>;
-		sdio_vref = <0xce4>;
+		sdio_vref = <3300>;
 		status = "okay";
 //-		//CHECK
 //-		//WIFI,host_wake_irq = <0x29 0x13 0x00>;
-		WIFI,host_wake_irq = <&gpio1 0x13 0x00>;
+		WIFI,host_wake_irq = <&gpio1 RK_PC3 GPIO_ACTIVE_HIGH>;
 		wifi_chip_type = "rtl8723bs";
 	};
 
@@ -216,7 +217,7 @@
 		pinctrl-0 = <&wifi_enable_h>;
 //-		//pinctrl-0 = <&sdio_pwrseq>;
 //-		//reset-gpios = <0x29 0x12 0x01>;
-		reset-gpios = <&gpio1 0x12 0x01>;
+		reset-gpios = <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
 	};
 };
 //- ^^^ watch that bracket!
@@ -984,7 +985,7 @@
 
 	hdmi_pin {
 		hdmi_backlight: hdmi-backlight {
-			//rockchip,pins = <0x03 0x05 0x00 0xaf>;
+//-			//rockchip,pins = <0x03 0x05 0x00 0xaf>;
 			rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_output_high>;
 		};
 	};
