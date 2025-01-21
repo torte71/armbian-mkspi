@@ -2,7 +2,7 @@
 
 INPUTFILE=klipad50tpl-old-after-EOF.dts
 REALNAME=rk3328-klipad50.dts
-UBOOTPATCH=02-mkspi-rk3328-add-uboot-dts.patch
+UBOOTPATCH=02-klipad50-rk3328-add-uboot-dts.patch
 
 # ---- COMMON: split INPUTFILE into "uboot-only" and "kernel-only"  files ----
 

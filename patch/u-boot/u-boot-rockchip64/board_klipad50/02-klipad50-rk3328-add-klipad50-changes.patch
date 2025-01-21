@@ -1,7 +1,7 @@
-diff --git a/configs/mkspi-rk3328_defconfig b/configs/mkspi-rk3328_defconfig
+diff --git a/configs/klipad50-rk3328_defconfig b/configs/klipad50-rk3328_defconfig
 index 1514ee63bb..2c80464d5a 100755
---- a/configs/mkspi-rk3328_defconfig
-+++ b/configs/mkspi-rk3328_defconfig
+--- a/configs/klipad50-rk3328_defconfig
++++ b/configs/klipad50-rk3328_defconfig
 @@ -5,11 +5,11 @@ CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
  CONFIG_SYS_TEXT_BASE=0x00200000
