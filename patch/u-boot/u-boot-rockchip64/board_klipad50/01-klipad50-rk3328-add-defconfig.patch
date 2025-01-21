@@ -6,11 +6,11 @@ Subject: feat: add U-Boot draft for MKSPI board
  configs/mkspi-rk3328_defconfig | 109 ++++++++++
  1 file changed, 109 insertions(+)
 
-diff --git a/configs/mkspi-rk3328_defconfig b/configs/mkspi-rk3328_defconfig
+diff --git a/configs/klipad50-rk3328_defconfig b/configs/klipad50-rk3328_defconfig
 new file mode 100755
 index 0000000000..1514ee63bb
 --- /dev/null
-+++ b/configs/mkspi-rk3328_defconfig
++++ b/configs/klipad50-rk3328_defconfig
 @@ -0,0 +1,109 @@
 +# Based on roc-cc-rk3328_defconfig
 +CONFIG_ARM=y

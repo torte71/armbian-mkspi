@@ -12,7 +12,7 @@
 BOARD_NAME="klipad50"
 BOARDFAMILY="rockchip64"
 BOARD_MAINTAINER="torte71"
-BOOTCONFIG="mkspi-rk3328_defconfig"
+BOOTCONFIG="klipad50-rk3328_defconfig"
 KERNEL_TARGET="current,edge"
 KERNEL_TEST_TARGET="current"
 FULL_DESKTOP="yes"
