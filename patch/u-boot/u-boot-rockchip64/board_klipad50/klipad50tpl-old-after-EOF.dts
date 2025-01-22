@@ -224,8 +224,8 @@
 //- ----------------------------------------------------------------------
 
 &analog_sound {
-		simple-audio-card,name = "TRS Jack";
-		status = "okay";
+	simple-audio-card,name = "TRS Jack";
+	status = "okay";
 };
 //-	analog_sound: analog-sound {
 //-		compatible = "simple-audio-card";
