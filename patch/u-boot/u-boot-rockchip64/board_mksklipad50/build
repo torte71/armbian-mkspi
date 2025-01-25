@@ -4,7 +4,7 @@
 
 ( cd ../../../.. ; \
   ./compile.sh \
-  	BOARD=klipad50 \
+  	BOARD=mksklipad50 \
   	BRANCH=current \
 	RELEASE=bookworm \
 	BUILD_MINIMAL=no \

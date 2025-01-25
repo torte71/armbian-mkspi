@@ -13,7 +13,7 @@
 
 / {
 	model = "Makerbase MKS-KLIPAD50";
-	compatible = "mks,rk3328-klipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
+	compatible = "mks,rk3328-mksklipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
 
 	aliases {
 		ethernet0 = "/ethernet@ff540000";
