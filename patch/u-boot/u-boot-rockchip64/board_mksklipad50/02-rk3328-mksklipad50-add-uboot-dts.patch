@@ -1,12 +1,12 @@
-diff --git a/arch/arm/dts/rk3328-klipad50.dts b/arch/arm/dts/rk3328-klipad50.dts
+diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad50.dts
 --- /dev/null
-+++ b/arch/arm/dts/rk3328-klipad50.dts
++++ b/arch/arm/dts/rk3328-mksklipad50.dts
 @@ -0,0 +1,2953 @@
 +/dts-v1/;
 +#include "rk3328.dtsi"
 +
 +/ {
-+	compatible = "mks,rk3328-klipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
++	compatible = "mks,rk3328-mksklipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
 +	interrupt-parent = <0x01>;
 +	#address-cells = <0x02>;
 +	#size-cells = <0x02>;

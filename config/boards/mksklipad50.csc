@@ -8,11 +8,11 @@
 # and https://github.com/makerbase-mks/MKS-SKIPR.)
 #
 # These boards and related configuration is very close to Renegade board ("roc-cc-rk3328_defconfig" and "rk3328-roc-cc" DT).
-# The klipad50 is same as mkspi, but with a different devicetree file.
-BOARD_NAME="klipad50"
+# The mksklipad50 is same as mkspi, but with a different devicetree file.
+BOARD_NAME="mksklipad50"
 BOARDFAMILY="rockchip64"
 BOARD_MAINTAINER="torte71"
-BOOTCONFIG="klipad50-rk3328_defconfig"
+BOOTCONFIG="mksklipad50-rk3328_defconfig"
 KERNEL_TARGET="current,edge"
 KERNEL_TEST_TARGET="current"
 FULL_DESKTOP="yes"

@@ -1,7 +1,7 @@
 /dts-v1/;
 
 / {
-	compatible = "mks,rk3328-klipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
+	compatible = "mks,rk3328-mksklipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
 	interrupt-parent = <0x01>;
 	#address-cells = <0x02>;
 	#size-cells = <0x02>;
