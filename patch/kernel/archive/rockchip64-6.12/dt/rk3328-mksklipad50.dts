@@ -11,7 +11,7 @@
 
 / {
 	model = "Makerbase MKS-KLIPAD50";
-	compatible = "mks,rk3328-klipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
+	compatible = "mks,rk3328-mksklipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
 
 	aliases {
 		ethernet0 = "/ethernet@ff540000";
@@ -202,11 +202,12 @@
 };
 
 &analog_sound {
-		simple-audio-card,name = "TRS Jack";
-		status = "okay";
+	simple-audio-card,name = "TRS Jack";
+	status = "okay";
 };
 
 &codec {
+	mute-gpios = <&grf_gpio RK_PA0 GPIO_ACTIVE_LOW>;
 	status = "okay";
 };
 
@@ -436,6 +437,9 @@
 };
 
 &pinctrl {
+	pinctrl-names = "default";
+	pinctrl-0 = <&rtc_32k>;
+
 	rtc: rtc {
 		rtc_32k: rtc-32k {
 			rockchip,pins = <1 RK_PD4 1 &pcfg_pull_none>;

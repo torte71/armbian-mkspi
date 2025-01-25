@@ -1,6 +1,6 @@
-diff --git a/arch/arm/dts/rk3328-klipad50.dts b/arch/arm/dts/rk3328-klipad50.dts
---- a/arch/arm/dts/rk3328-klipad50.dts	1970-01-01 01:00:00.000000000 +0100
-+++ b/arch/arm/dts/rk3328-klipad50.dts	2025-01-20 21:24:54.617619665 +0100
+diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad50.dts
+--- a/arch/arm/dts/rk3328-mksklipad50.dts	1970-01-01 01:00:00.000000000 +0100
++++ b/arch/arm/dts/rk3328-mksklipad50.dts	2025-01-20 21:24:54.617619665 +0100
 @@ -0,0 +1,562 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
@@ -14,7 +14,7 @@ diff --git a/arch/arm/dts/rk3328-klipad50.dts b/arch/arm/dts/rk3328-klipad50.dts
 +
 +/ {
 +	model = "Makerbase MKS-KLIPAD50";
-+	compatible = "mks,rk3328-klipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
++	compatible = "mks,rk3328-mksklipad50", "mks,rk3328-mkspi", "rockchip,rk3328";
 +
 +	aliases {
 +		ethernet0 = "/ethernet@ff540000";
