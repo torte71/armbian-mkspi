@@ -100,6 +100,10 @@
 		regulator-name = "vcc_sdio";
 		regulator-type = "voltage";
 		regulator-min-microvolt = <1800000>;
+//-		//from klipad (start)
+		regulator-settling-time-us = <5000>;
+		startup-delay-us = <2000>;
+//-		//from klipad (end)
 		regulator-max-microvolt = <3300000>;
 		regulator-always-on;
 //---kernel-start---
