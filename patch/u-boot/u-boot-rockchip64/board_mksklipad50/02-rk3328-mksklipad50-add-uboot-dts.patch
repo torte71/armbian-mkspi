@@ -178,8 +178,8 @@ diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad
 +};
 +
 +&analog_sound {
-+		simple-audio-card,name = "TRS Jack";
-+		status = "okay";
++	simple-audio-card,name = "TRS Jack";
++	status = "okay";
 +};
 +
 +&codec {
