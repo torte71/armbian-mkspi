@@ -183,6 +183,7 @@ diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad
 +};
 +
 +&codec {
++	mute-gpios = <&grf_gpio RK_PA0 GPIO_ACTIVE_LOW>;
 +	status = "okay";
 +};
 +
@@ -402,6 +403,9 @@ diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad
 +};
 +
 +&pinctrl {
++	pinctrl-names = "default";
++	pinctrl-0 = <&rtc_32k>;
++
 +	rtc: rtc {
 +		rtc_32k: rtc-32k {
 +			rockchip,pins = <1 RK_PD4 1 &pcfg_pull_none>;
