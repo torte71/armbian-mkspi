@@ -1,7 +1,7 @@
 diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad50.dts
 --- a/arch/arm/dts/rk3328-mksklipad50.dts	1970-01-01 01:00:00.000000000 +0100
-+++ b/arch/arm/dts/rk3328-mksklipad50.dts	2025-01-20 21:24:54.617619665 +0100
-@@ -0,0 +1,562 @@
++++ b/arch/arm/dts/rk3328-mksklipad50.dts	2025-01-28 07:53:01.403488331 +0100
+@@ -0,0 +1,566 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Based on rk3328-roc-cc.dts
@@ -277,7 +277,7 @@ diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad
 +	rk805: pmic@18 {
 +		compatible = "rockchip,rk805";
 +		reg = <0x18>;
-+		interrupt-parent = <&gpio2>;
++		interrupt-parent = <&gpio1>;
 +		interrupts = <RK_PD0 IRQ_TYPE_LEVEL_LOW>;
 +		#clock-cells = <1>;
 +		clock-output-names = "xin32k", "rk805-clkout2";
