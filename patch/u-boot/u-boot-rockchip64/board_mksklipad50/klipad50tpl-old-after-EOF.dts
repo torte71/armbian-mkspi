@@ -77,7 +77,10 @@
 
 	vcc_sd: sdmmc-regulator {
 		compatible = "regulator-fixed";
-		gpio = <&gpio0 RK_PD6 GPIO_ACTIVE_LOW>;
+//-		//GPIO_ACTIVE_ mkspi:LOW klipad:HIGH
+//-		//sovol:<gpio@ff230000 0x14 0x00> # _HIGH=0
+//-		//mkspi:<gpio@ff210000 0x1e 0x01> # _LOW=1
+		gpio = <&gpio0 RK_PD6 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&sdmmc0m1_pin>;
 		regulator-boot-on;
@@ -89,10 +92,9 @@
 
 	vcc_sdio: sdmmcio-regulator {
 		compatible = "regulator-gpio";
-//-		//armbian
-//-		//gpios = <&gpio2 RK_PC4 GPIO_ACTIVE_HIGH>;
-//-		//klipad
-		gpios = <&gpio0 RK_PC4 GPIO_ACTIVE_HIGH>;
+//-		//GPIO_ACTIVE_ mkspi:LOW klipad:HIGH
+//-		//sovol: <0x71 0x14 0x00> # 0x71=gpio@ff230000=gpio2 0x14=20=RK_PC4 0x00=GPIO_ACTIVE_HIGH
+		gpios = <&gpio2 RK_PC4 GPIO_ACTIVE_HIGH>;
 		pinctrl-0 = <&sdio_vcc_pin>;
 		pinctrl-names = "default";
 		states = <1800000 0x0>,
