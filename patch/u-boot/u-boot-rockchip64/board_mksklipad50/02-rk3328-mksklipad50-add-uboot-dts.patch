@@ -1,7 +1,7 @@
 diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad50.dts
 --- a/arch/arm/dts/rk3328-mksklipad50.dts	1970-01-01 01:00:00.000000000 +0100
-+++ b/arch/arm/dts/rk3328-mksklipad50.dts	2025-01-28 07:53:01.403488331 +0100
-@@ -0,0 +1,566 @@
++++ b/arch/arm/dts/rk3328-mksklipad50.dts	2025-01-28 16:55:19.681979193 +0100
+@@ -0,0 +1,568 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Based on rk3328-roc-cc.dts
@@ -66,6 +66,8 @@ diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad
 +		regulator-name = "vcc_sdio";
 +		regulator-type = "voltage";
 +		regulator-min-microvolt = <1800000>;
++		regulator-settling-time-us = <5000>;
++		startup-delay-us = <2000>;
 +		regulator-max-microvolt = <3300000>;
 +		regulator-always-on;
 +		vin-supply = <&vcc_sys>;
