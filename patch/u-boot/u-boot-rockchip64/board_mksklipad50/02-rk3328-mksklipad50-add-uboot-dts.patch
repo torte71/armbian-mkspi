@@ -1,12 +1,18 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Thorsten Maerz <info@netztorte.de>
+Date: Thu, 30 Jan 2025 15:00:00 +0000
+Subject: feat: Add u-boot dts for MKSKLIPAD50 board
+---
+
 diff --git a/arch/arm/dts/rk3328-mksklipad50.dts b/arch/arm/dts/rk3328-mksklipad50.dts
 --- a/arch/arm/dts/rk3328-mksklipad50.dts	1970-01-01 01:00:00.000000000 +0100
 +++ b/arch/arm/dts/rk3328-mksklipad50.dts	2025-01-28 16:55:19.681979193 +0100
 @@ -0,0 +1,568 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
-+ * Based on rk3328-roc-cc.dts
++ * Based on rk3328-roc-cc.dtb from original MKS-Klipad50 image
 + *
-+ * Copyright (c) 2017 T-Chip Intelligent Technology Co., Ltd
++ * Copyright (c) 2025 Thorsten Maerz
 + */
 +
 +/dts-v1/;
