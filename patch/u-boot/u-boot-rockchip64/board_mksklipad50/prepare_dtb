@@ -39,7 +39,13 @@ mkdir -p $DIFFDIR_A
 mkdir -p $DIFFDIR_B
 cp ../$ONLY_UBOOT_TMP $DIFFDIR_B/$REALNAME
 
-echo "diff --git $DIFFDIR_A/$REALNAME $DIFFDIR_B/$REALNAME">../$UBOOTPATCH
+echo "From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001">../$UBOOTPATCH
+echo "From: Thorsten Maerz <info@netztorte.de>">>../$UBOOTPATCH
+echo "Date: Thu, 30 Jan 2025 15:00:00 +0000">>../$UBOOTPATCH
+echo "Subject: feat: Add u-boot dts for MKSKLIPAD50 board">>../$UBOOTPATCH
+echo "---">>../$UBOOTPATCH
+echo >>../$UBOOTPATCH
+echo "diff --git $DIFFDIR_A/$REALNAME $DIFFDIR_B/$REALNAME">>../$UBOOTPATCH
 diff -uN $DIFFDIR_A/$REALNAME $DIFFDIR_B/$REALNAME>>../$UBOOTPATCH
 
 cd ..
