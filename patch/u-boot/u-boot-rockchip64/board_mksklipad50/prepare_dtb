@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INPUTFILE=klipad50tpl-old-after-EOF.dts
+INPUTFILE=klipad50tpl.dts
 REALNAME=rk3328-mksklipad50.dts
 UBOOTPATCH=02-rk3328-mksklipad50-add-uboot-dts.patch
 
@@ -41,7 +41,8 @@ cp ../$ONLY_UBOOT_TMP $DIFFDIR_B/$REALNAME
 
 echo "From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001">../$UBOOTPATCH
 echo "From: Thorsten Maerz <info@netztorte.de>">>../$UBOOTPATCH
-echo "Date: Thu, 30 Jan 2025 15:00:00 +0000">>../$UBOOTPATCH
+#echo "Date: Thu, 30 Jan 2025 15:00:00 +0000">>../$UBOOTPATCH
+echo "Date: $(date --rfc-2822)">>../$UBOOTPATCH
 echo "Subject: feat: Add u-boot dts for MKSKLIPAD50 board">>../$UBOOTPATCH
 echo "---">>../$UBOOTPATCH
 echo >>../$UBOOTPATCH
