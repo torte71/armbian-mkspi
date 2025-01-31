@@ -9,4 +9,5 @@
 	RELEASE=bookworm \
 	BUILD_MINIMAL=no \
 	BUILD_DESKTOP=no \
+	BSPFREEZE=yes \
 	KERNEL_CONFIGURE=no )
