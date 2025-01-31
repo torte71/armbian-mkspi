@@ -248,7 +248,7 @@
 	assigned-clock-rate = <50000000>;
 	assigned-clock-parents = <&cru SCLK_MAC2PHY_SRC>;
 	phy-supply = <&vcc_phy>;
- 	status = "disabled";
+	status = "disabled";
 };
 
 //---kernel-start---
@@ -554,8 +554,8 @@
 		pinctrl_spi0_cs2: pinctrl_spi0_cs2 {
 //-			//rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
 			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
+		};
+	};
 };
 
 &sdmmc {
@@ -591,7 +591,7 @@
 //---kernel-start---
 &spdif_sound {
 //- 	//status = "okay";
- 	status = "disabled";
+	status = "disabled";
 };
 //---kernel-end---
 
@@ -615,7 +615,7 @@
 
 &uart0 {
 	pinctrl-0 = <&uart0_xfer &uart0_cts>;
- 	status = "okay";
+	status = "okay";
 };
 
 &uart2 {
@@ -729,17 +729,17 @@
 
 //- disable /dev/video1 + /dev/media0
 &vpu {
-  	status = "disabled";
+	status = "disabled";
 };
 
 //---kernel-start---
 //- disable /dev/video2 + /dev/media1
 &vdec {
-  	status = "disabled";
+	status = "disabled";
 };
 
 //- disable /dev/video0
 &rga {
-  	status = "disabled";
+	status = "disabled";
 };
 //---kernel-end---
