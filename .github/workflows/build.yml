@@ -119,16 +119,17 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          if [[ ${{inputs.mksklipad50_minimal}} == "true" ]] ; then BUILD_MINIMAL=yes ; else BUILD_MINIMAL=false ; fi
-          if [[ ${{inputs.mksklipad50_desktop}} == "true" ]] ; then BUILD_DESKTOP=yes ; else BUILD_DESKTOP=false ; fi
+          if [[ ${{inputs.mksklipad50_minimal}} == "true" ]] ; then BUILD_MINIMAL=yes ; else BUILD_MINIMAL=no ; fi
+          if [[ ${{inputs.mksklipad50_desktop}} == "true" ]] ; then BUILD_DESKTOP=yes ; else BUILD_DESKTOP=no ; fi
+          if [[ ${{inputs.mksklipad50_bspfreeze}} == "true" ]] ; then BSPFREEZE=yes ; else BSPFREEZE=no ; fi
           ./compile.sh \
             BOARD=${{inputs.armbian_board}} \
             BRANCH=${{inputs.armbian_kernel_branch}} \
             RELEASE=${{inputs.armbian_release}} \
             BUILD_MINIMAL=$BUILD_MINIMAL \
             BUILD_DESKTOP=$BUILD_DESKTOP \
+            BSPFREEZE=$BSPFREEZE \
             COMPRESS_OUTPUTIMAGE=${{inputs.mksklipad50_compress}} \
-            BSPFREEZE=${{inputs.mksklipad50_bspfreeze}} \
             KERNEL_CONFIGURE=no
 
       - name: Upload artifact
