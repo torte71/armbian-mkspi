@@ -218,7 +218,7 @@
 	assigned-clock-rate = <50000000>;
 	assigned-clock-parents = <&cru SCLK_MAC2PHY_SRC>;
 	phy-supply = <&vcc_phy>;
- 	status = "disabled";
+	status = "disabled";
 };
 
 &dfi {
@@ -288,9 +288,9 @@
 	interrupts = <GIC_SPI 35 IRQ_TYPE_LEVEL_HIGH>,
 		     <GIC_SPI 71 IRQ_TYPE_LEVEL_HIGH>;
 	clocks = <&cru PCLK_HDMI>,
-			 <&cru SCLK_HDMI_SFC>,
-			 <&hdmiphy>, //0x4b
-			 <&cru SCLK_RTC32K>;
+		 <&cru SCLK_HDMI_SFC>,
+		 <&hdmiphy>,
+		 <&cru SCLK_RTC32K>;
 	clock-names = "iahb",
 		      "isfr",
 		      "vpll",
@@ -490,8 +490,8 @@
 	spi0_cs2 {
 		pinctrl_spi0_cs2: pinctrl_spi0_cs2 {
 			rockchip,pins = <3 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
+		};
+	};
 };
 
 &sdmmc {
@@ -521,7 +521,7 @@
 };
 
 &spdif_sound {
- 	status = "disabled";
+	status = "disabled";
 };
 
 &tsadc {
@@ -544,7 +544,7 @@
 
 &uart0 {
 	pinctrl-0 = <&uart0_xfer &uart0_cts>;
- 	status = "okay";
+	status = "okay";
 };
 
 &uart2 {
@@ -567,6 +567,7 @@
 		status = "okay";
 	};
 };
+
 &sdio {
 	pinctrl-names = "default";
 	pinctrl-0 = <&sdmmc1_bus4 &sdmmc1_cmd &sdmmc1_clk>;
@@ -607,13 +608,13 @@
 };
 
 &vpu {
-  	status = "disabled";
+	status = "disabled";
 };
 
 &vdec {
-  	status = "disabled";
+	status = "disabled";
 };
 
 &rga {
-  	status = "disabled";
+	status = "disabled";
 };
