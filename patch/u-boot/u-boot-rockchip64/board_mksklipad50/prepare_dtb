@@ -22,7 +22,12 @@ strip_parts kernel > $ONLY_UBOOT_TMP
 
 # ---- copy "kernel-only" file into KERNELDTB directory ----
 
+# current
 KERNELDTB=../../../kernel/archive/rockchip64-6.12/dt/
+cp -L $ONLY_KERNEL_TMP $KERNELDTB/$REALNAME
+
+# edge
+KERNELDTB=../../../kernel/archive/rockchip64-6.13/dt/
 cp -L $ONLY_KERNEL_TMP $KERNELDTB/$REALNAME
 
 # ---- generate patch from "uboot-only" file ----
