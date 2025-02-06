@@ -10,8 +10,8 @@ which also handles topics like screen rotation or beeps
 and aims for mimicking the Sovol setup (so you can simply re-use your prior config files and it should behave, as you are used to).
 
 > [!NOTE]
-> From Armbian perspective, the images from this project use a customized kernel, so Armbian cannot provide updates for them.
-> To benefit from regular kernel and board updates, you need images built from unmodified Armbian mainline.
+> From Armbian perspective, the images from this project use a customized kernel, so Armbian cannot provide updates for them.\
+> To benefit from regular kernel and board updates, you need images built from unmodified Armbian mainline.\
 > (Links to such images will follow soon.)
 
 This project is based on the [Armbian MKSPI](https://github.com/redrathnure/armbian-mkspi) project by Maxim Medvedev (redrathnure), which got included into [mainline Armbian](https://github.com/armbian/build) in December 2024.
