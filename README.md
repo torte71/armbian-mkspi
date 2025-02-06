@@ -4,13 +4,20 @@ These images offer full hardware support for the MKS-Klipad50, just as the origi
 
 They are based on a recent Armbian version (bookworm) with recent kernels (6.12.x), whereas the original image is based on Armbian buster, which is completely outdated. Most package repositories for that ancient version have been taken offline in the beginning of 2024, so installing additions is becoming more and more limited.
 
-The images are meant to be used as a base for installing Klipper (which is not preinstalled).<br>
+The images can be used as a base for installing Klipper (which is not preinstalled).<br>
 See here for a [Setup Guide](https://torte71.github.io/InsideSovolKlipperScreen/armbian-mainline-setup.html),
 which also handles topics like screen rotation or beeps
 and aims for mimicking the Sovol setup (so you can simply re-use your prior config files and it should behave, as you are used to).
 
+> [!NOTE]
+> From Armbian perspective, the images from this project use a customized kernel, so Armbian cannot provide updates for them.
+> To benefit from regular kernel and board updates, you need images built from unmodified Armbian mainline.
+> (Links to such images will follow soon.)
+
 This project is based on the [Armbian MKSPI](https://github.com/redrathnure/armbian-mkspi) project by Maxim Medvedev (redrathnure), which got included into [mainline Armbian](https://github.com/armbian/build) in December 2024.
 All these Makerbase boards require the same kernel changes, but the MKS-Klipad50 needs a different devicetree (dtb) setup.
+
+The MKS-Klipad50 changes from this project have been integrated into mainline Armbian in February 2025.
 
 Big thanks go to Maxim Medvedev for his work and answering my questions.
 
