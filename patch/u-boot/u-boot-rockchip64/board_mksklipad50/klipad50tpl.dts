@@ -229,11 +229,14 @@
 		reset-gpios = <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
 	};
 
-	backlight: backlight {
-		compatible = "gpio-backlight";
-		gpios = <&gpio3 RK_PA5 GPIO_ACTIVE_HIGH>;
-		default-on;
-	};
+//-
+//- "gpio-backlight" has a bug that makes it ignore "default-on"
+//
+//-	backlight: backlight {
+//-		compatible = "gpio-backlight";
+//-		gpios = <&gpio3 RK_PA5 GPIO_ACTIVE_HIGH>;
+//-		default-on;
+//-	};
 };
 //- ^^^ watch that bracket!
 //- ----------------------------------------------------------------------
